@@ -1,10 +1,17 @@
 import React from "react";
+import { Row, Col } from "react-flexbox-grid";
 
 const About = () => (
-  <div>
-    <h1>About Page</h1>
-    <p>Did you get here via Redux?</p>
-  </div>
+  <Row>
+    <Col xs={12}>
+      <Row center="xs">
+        <Col style={{ color: "grey" }}>
+          <h1>About</h1>
+          <p>Creted by Michael Senejoa</p>
+        </Col>
+      </Row>
+    </Col>
+  </Row>
 );
 
 export default About;

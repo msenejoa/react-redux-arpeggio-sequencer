@@ -5,9 +5,13 @@ import About from "../about";
 
 const App = () => (
   <div>
-    <header>
-      <Link to="/">Home</Link>
-      <Link to="/about-us">About</Link>
+    <header style={{ marginTop: 12 }}>
+      <Link to="/" style={{ padding: 16, textDecoration: "none" }}>
+        Home
+      </Link>
+      <Link to="/about-us" style={{ padding: 16, textDecoration: "none" }}>
+        About
+      </Link>
     </header>
 
     <main>
