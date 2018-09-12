@@ -8,7 +8,7 @@ export const meter = new Tone.Meter();
 
 export const synthSequencer = (options, userScale, key) => {
   let { attack, decay, sustain, release } = options.synthOptions.envelope;
-  let timeDelay = (attack + decay + sustain + release + 0.06) * 1000;
+  let timeDelay = (attack + decay + sustain + release + 0.09) * 1000;
 
   let notes = Scale.notes(key + " " + userScale);
   let distance = Distance.semitones(notes[0], notes[options.note - 1]);

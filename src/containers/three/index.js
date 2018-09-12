@@ -208,6 +208,7 @@ class Three extends React.Component {
           width={this.state.width}
           height={this.state.height}
           clearColor={0xffffff}
+          antialias={true}
           onAnimate={() => this.onAnimate()}
         >
           <scene>

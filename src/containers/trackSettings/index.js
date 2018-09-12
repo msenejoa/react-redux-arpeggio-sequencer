@@ -6,8 +6,11 @@ import {
   changeTrackVolume,
   changeTrackOctave,
   selectTrack,
-  trackMenuClick
+  trackMenuClick,
+  changeTrackPattern
 } from "../../modules/sequencer.js";
+
+import { trackPatternChecker } from "../../modules/trackRoutes.js";
 import { Row, Col } from "react-flexbox-grid";
 //import Dropdown from 'react-dropdown'
 //import scale from 'music-scale'
@@ -27,6 +30,8 @@ class TrackSettings extends React.Component {
       attack: 0,
       decay: 0,
       volume: 0,
+      pattern: 3,
+      patternSelect: 0,
       scale: "major",
       octave: 0,
       checked: false,
@@ -55,6 +60,14 @@ class TrackSettings extends React.Component {
         });
       });
     }
+  }
+
+  changePattern(i) {
+    this.props.onTrackPatternChange(
+      i,
+      this.props.tracks.activeTrack,
+      this.props.tracks.tracks
+    );
   }
 
   changeAttack(i) {
@@ -87,6 +100,10 @@ class TrackSettings extends React.Component {
       this.props.tracks.activeTrack,
       this.props.tracks.tracks
     );
+  }
+
+  trackChecker(tracks) {
+    this.setState({ pattern: trackPatternChecker(tracks) });
   }
 
   componentWillMount() {
@@ -140,6 +157,7 @@ class TrackSettings extends React.Component {
 
     this.setState({ scale: scale });
     if (activeBeatId.length > 0) {
+      this.trackChecker(tracks[activeTrackRow]);
       let { octave } = tracks[activeTrackRow][activeTrackIndex].synth;
       let { checked } = tracks[activeTrackRow][activeTrackIndex];
       let volume =
@@ -153,6 +171,7 @@ class TrackSettings extends React.Component {
         volume: volume,
         octave: octave,
         checked: checked
+        //pattern: pattern
       });
     }
   }
@@ -169,6 +188,9 @@ class TrackSettings extends React.Component {
     }
     if (value === "octave") {
       this.onChangeOctave(this.state.octave);
+    }
+    if (value === "pattern") {
+      this.changePattern(this.state.patternSelect);
     }
   }
 
@@ -188,19 +210,30 @@ class TrackSettings extends React.Component {
   }
 
   render() {
-    //const { activeTrackIndex } = this.props.tracks;
-
-    /*
-    const { activeTrackIndex, activeTrackRow, activeBeatId, tracks, } = this.props.tracks;
-    let note = ''
-
-
-    if (activeBeatId.length > 0){
-      note = tracks[activeTrackRow][activeTrackIndex].synth.note
-    }
-*/
-
     let collapse = this.state.collapse;
+
+    let numberOfPatterns = 5;
+    const buttonArray = i => (
+      <Col
+        xs={2}
+        key={i}
+        className="track-pattern-button-container"
+        style={{
+          backgroundColor:
+            this.state.pattern.bool === true && this.state.pattern.value === i
+              ? "#f0932b"
+              : "#c7ecee"
+        }}
+      >
+        <div onClick={() => this.changePattern(i)}>{i + 1}</div>
+      </Col>
+    );
+
+    let patternArray = [];
+
+    for (let i = 0; i < numberOfPatterns; i++) {
+      patternArray.push(buttonArray(i));
+    }
 
     return (
       <Row
@@ -218,7 +251,15 @@ class TrackSettings extends React.Component {
           </Row>
           <Row center="xs">
             <Col xs={12}>
-              <Row around="xs">
+              <Row around="xs" style={{ margin: 12 }}>
+                <Col xs={12}>
+                  <p className="slider-text">track pattern</p>
+                </Col>
+
+                <Col xs={12}>
+                  <Row around="xs">{patternArray}</Row>
+                </Col>
+
                 <Col xs={this.state.isMobile ? 2 : 12} className="sliders">
                   <Slider
                     value={Number(this.state.octave)}
@@ -242,7 +283,7 @@ class TrackSettings extends React.Component {
                     value={Number(this.state.attack)}
                     min={0.0001}
                     max={1}
-                    step={0.001}
+                    step={0.01}
                     tooltip={false}
                     orientation="vertical"
                     onChange={value => this.handleOnChange(value, "attack")}
@@ -256,9 +297,9 @@ class TrackSettings extends React.Component {
                 <Col xs={3}>
                   <Slider
                     value={Number(this.state.decay)}
-                    min={0.01}
+                    min={0.05}
                     max={1}
-                    step={0.001}
+                    step={0.01}
                     tooltip={false}
                     orientation="vertical"
                     onChange={value => this.handleOnChange(value, "decay")}
@@ -318,6 +359,9 @@ const mapDispatchToProps = dispatch => {
     },
     onTrackMenuSelect: () => {
       dispatch(trackMenuClick());
+    },
+    onTrackPatternChange: (pattern, trackNumber, tracks) => {
+      dispatch(changeTrackPattern(pattern, trackNumber, tracks));
     }
   };
 };

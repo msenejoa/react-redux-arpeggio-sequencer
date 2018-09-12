@@ -27,7 +27,7 @@ class TrackOptions extends React.Component {
     this.state = {
       //collapse: false,
       height: 400,
-      tempo: 120,
+      tempo: 180,
       play: false,
       scale: "major",
       key: "C"

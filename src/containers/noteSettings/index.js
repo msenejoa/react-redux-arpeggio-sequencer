@@ -333,7 +333,7 @@ class NoteSettings extends React.Component {
                     value={Number(this.state.attack)}
                     min={0.0001}
                     max={1}
-                    step={0.001}
+                    step={0.01}
                     tooltip={false}
                     orientation="vertical"
                     onChange={value => this.handleOnChange(value, "attack")}
@@ -347,9 +347,9 @@ class NoteSettings extends React.Component {
                 <Col xs={2}>
                   <Slider
                     value={Number(this.state.decay)}
-                    min={0.01}
+                    min={0.05}
                     max={2}
-                    step={0.001}
+                    step={0.01}
                     tooltip={false}
                     orientation="vertical"
                     onChange={value => this.handleOnChange(value, "decay")}
@@ -364,7 +364,7 @@ class NoteSettings extends React.Component {
                     value={Number(this.state.volume)}
                     min={-30}
                     max={0}
-                    step={0.001}
+                    step={0.01}
                     tooltip={false}
                     orientation="vertical"
                     onChange={value => this.handleOnChange(value, "volume")}

@@ -94,6 +94,7 @@ button:disabled {
 .track-settings {
   //height: 70px;
   padding-top: 12px;
+  padding-right: 12px;
   //margin-bottom:24px;
 }
 
@@ -121,4 +122,9 @@ button:disabled {
   margin: 0px;
 
   //margin-top: 50px;
+}
+
+.track-pattern-button-container {
+  border: 1px solid grey;
+  border-radius: 6px;
 }

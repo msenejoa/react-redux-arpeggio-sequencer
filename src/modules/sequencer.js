@@ -1,5 +1,5 @@
 //import {trackOne} from './trackRoutes'
-import { gen } from "./trackRoutes";
+import { gen, arpDictionary, arp } from "./trackRoutes";
 
 import scale from "music-scale";
 
@@ -15,10 +15,13 @@ export const CHANGE_SCALE = "sequencer/CHANGE_SCALE";
 export const CHANGE_OCTAVE = "sequencer/CHANGE_OCTAVE";
 export const TOGGLE_BEAT = "sequencer/TOGGLE_BEAT";
 export const SELECT_TRACK = "sequencer/SELECT_TRACK";
+
 export const CHANGE_TRACK_VOLUME = "sequencer/CHANGE_TRACK_VOLUME";
 export const CHANGE_TRACK_ATTACK = "sequencer/CHANGE_ATTACK";
 export const CHANGE_TRACK_DECAY = "sequencer/CHANGE_TRACK_DECAY";
 export const CHANGE_TRACK_OCTAVE = "sequencer/CHANGE_TRACK_OCTAVE";
+export const CHANGE_TRACK_PATTERN = "sequencer/CHANGE_TRACK_PATTERN";
+
 export const BEAT_MENU_CLICK = "sequencer/BEAT_MENU_CLICK";
 export const TRACK_MENU_CLICK = "sequencer/TRACK_MENU_CLICK";
 export const SONG_MENU_CLICK = "sequencer/SONG_MENU_CLICK";
@@ -47,7 +50,7 @@ const initialState = {
   activeBeatBool: false,
   activeSongBool: true,
   play: false,
-  tempo: 120,
+  tempo: 180,
   key: "c",
   trackView: false,
   beatView: false,
@@ -132,6 +135,11 @@ export default (state = initialState, action) => {
         //activeTrackIndex: null
       };
     case CHANGE_TRACK_VOLUME:
+      return {
+        ...state,
+        tracks: action.tracks
+      };
+    case CHANGE_TRACK_PATTERN:
       return {
         ...state,
         tracks: action.tracks
@@ -278,8 +286,12 @@ export const viewBeatSettings = () => {
 
 export const addTracks = oldTracks => {
   let newTrackNumber = oldTracks.length + 1;
-  oldTracks.push([...gen()]);
+  oldTracks.push([...gen(newTrackNumber - 1)]);
+  //dispatch(add here)
+
   return dispatch => {
+    dispatch(selectTrack(newTrackNumber - 1));
+    dispatch(trackMenuClick());
     dispatch({
       type: ADD_TRACKS,
       qty: newTrackNumber,
@@ -339,8 +351,10 @@ export const activateBeat = (id, tracks) => {
 };
 
 export const changeNote = (newNote, tracks, row, index) => {
-  let newTracks = tracks;
+  let newTracks = tracks.slice(0);
   newTracks[row][index].synth.note = newNote;
+  newTracks[row][index].pattern = null;
+
   return dispatch => {
     dispatch({
       type: CHANGE_NOTE,
@@ -431,6 +445,21 @@ export const changeScale = scale => {
     dispatch({
       type: CHANGE_SCALE,
       data: scale
+    });
+  };
+};
+
+export const changeTrackPattern = (pattern, trackNumber, tracks) => {
+  let newTracks = tracks.slice(0);
+  for (let key in newTracks[trackNumber]) {
+    let note = arp(key, pattern);
+    newTracks[trackNumber][key].synth.note = note;
+    newTracks[trackNumber][key].pattern = pattern;
+  }
+  return dispatch => {
+    dispatch({
+      type: CHANGE_TRACK_PATTERN,
+      tracks: newTracks
     });
   };
 };

@@ -51,7 +51,7 @@ class Home extends React.Component {
     super(props);
     this.state = {
       //value: 0,
-      tempo: 120,
+      tempo: 180,
       play: false,
       scale: "",
       sidebarOpen: true,
@@ -209,8 +209,8 @@ class Home extends React.Component {
                                       fontSize: "1rem",
                                       display: "table-cell",
                                       verticalAlign: "middle",
-                                      "justify-content": "center",
-                                      "text-align": "center"
+                                      justifyContent: "center",
+                                      textAlign: "center"
                                     }}
                                   >
                                     <FontAwesomeIcon icon={faTimes} />
