@@ -59,6 +59,19 @@ export const arpDictionary = [
   [0, 1, 2, 4, 5, 3]
 ];
 
+export function trackOctaveChecker(tracks) {
+  let octave = tracks[0].synth.octave;
+  let bool = true;
+  for (let i in tracks) {
+    bool *= tracks[i].synth.octave === octave;
+  }
+  bool = bool ? true : false;
+  return {
+    value: octave,
+    bool: bool
+  };
+}
+
 export function trackPatternChecker(tracks) {
   let pattern = tracks[0].pattern;
   let bool = true;
