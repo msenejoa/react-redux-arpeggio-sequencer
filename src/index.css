@@ -100,6 +100,7 @@ button:disabled {
 
 .slider-text {
   font-size: 0.8rem;
+  margin-bottom: 0px;
 }
 
 .react-numeric-input input {

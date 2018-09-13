@@ -268,7 +268,7 @@ class TrackSettings extends React.Component {
     return (
       <Row
         style={{
-          height: collapse ? 60 : this.state.isMobile ? 220 : 350,
+          height: collapse ? 60 : this.state.isMobile ? 320 : 320,
           transition: "all 0.75s",
           overflow: "hidden"
         }}

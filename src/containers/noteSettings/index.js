@@ -291,7 +291,7 @@ class NoteSettings extends React.Component {
     return (
       <Row
         style={{
-          height: collapse ? 60 : this.state.isMobile ? 300 : 420,
+          height: collapse ? 60 : this.state.isMobile ? 370 : 370,
           transition: "all 0.75s",
           overflow: "hidden"
         }}
@@ -320,7 +320,8 @@ class NoteSettings extends React.Component {
                         <p
                           style={{
                             color: this.state.checked ? "#dff9fb" : "#7ed6df",
-                            fontWeight: "bold"
+                            fontWeight: "bold",
+                            margin: 6
                           }}
                         >
                           {" "}
@@ -392,21 +393,6 @@ class NoteSettings extends React.Component {
                   <div className="slider-text">Attack</div>
                 </Col>
                 <Col xs={2}>
-                  {/*
-                  <Slider
-                    value={Number(this.state.decay)}
-                    min={0.05}
-                    max={2}
-                    step={0.05}
-                    tooltip={false}
-                    orientation="vertical"
-                    onChange={value => this.handleOnChange(value, "decay")}
-                    onChangeComplete={() =>
-                      this.handleOnChangeComplete("decay")
-                    }
-                  />
-                */}
-
                   <Slider
                     value={Number(this.state.decay)}
                     min={0.05}
