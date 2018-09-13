@@ -107,7 +107,6 @@ class TrackSettings extends React.Component {
   }
 
   trackChecker(tracks) {
-    console.log(trackOctaveChecker(tracks));
     this.setState({
       pattern: trackPatternChecker(tracks),
       octaveSelector: trackOctaveChecker(tracks)
