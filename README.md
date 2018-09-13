@@ -1,3 +1,7 @@
+![Sequencer](https://i.imgur.com/crd2Kmer.png "React arpeggiator")
+
+![Sequencer](https://i.imgur.com/HmYDoet.png "THREE.js visualizer")
+
 ## Installation
 
 ```bash
