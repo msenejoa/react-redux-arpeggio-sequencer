@@ -201,30 +201,6 @@ class NoteSettings extends React.Component {
     });
   }
 
-  handleOnChangeComplete(value) {
-    if (value === "attack") {
-      this.changeAttack(this.state.attack);
-    }
-    if (value === "decay") {
-      this.changeDecay(this.state.decay);
-    }
-    if (value === "volume") {
-      this.changeVolume(this.state.volume);
-    }
-    if (value === "octave") {
-      this.onChangeOctave(this.state.octave);
-    }
-    if (value === "note") {
-      this.changeNote(this.state.note);
-    }
-  }
-
-  handleOnChange(value, paramater) {
-    this.setState({
-      [paramater]: value
-    });
-  }
-
   toggleBeat() {
     if (this.props.tracks.activeBeatId.length > 0) {
       this.props.onToggleBeat(
@@ -280,11 +256,6 @@ class NoteSettings extends React.Component {
     for (let i = 0; i < 7; i++) {
       intervalArray.push(intervalButtonArray(i));
     }
-    //const { activeTrackIndex, } = this.props.tracks;
-
-    //let scaleList = scale.get('c ' + this.state.scale)
-
-    //TWEEN.update();
 
     let collapse = this.state.collapse;
 
@@ -334,22 +305,6 @@ class NoteSettings extends React.Component {
               </Row>
 
               <Row around="xs">
-                {/*
-                <Col xs={this.state.isMobile ? 2 : 6}>
-                  <Slider
-                    value={Number(this.state.note)}
-                    min={1}
-                    max={7}
-                    step={1}
-                    tooltip={false}
-                    orientation="vertical"
-                    onChange={i => this.handleOnChange(i, "note")}
-                    onChangeComplete={() => this.handleOnChangeComplete("note")}
-                  />
-                  <div className="slider-text">Interval {this.state.note}</div>
-                </Col>
-
-              */}
                 <Col xs={12}>
                   <p className="slider-text">interval</p>
                 </Col>
@@ -362,34 +317,16 @@ class NoteSettings extends React.Component {
                 <Col xs={12}>
                   <Row around="xs">{octaveArray}</Row>
                 </Col>
-                {/*
-                <Col xs={this.state.isMobile ? 2 : 6}>
-                  <Slider
-                    value={Number(this.state.octave)}
-                    min={1}
-                    max={8}
-                    step={1}
-                    tooltip={false}
-                    orientation="vertical"
-                    onChange={i => this.handleOnChange(i, "octave")}
-                    onChangeComplete={() =>
-                      this.handleOnChangeComplete("octave")
-                    }
-                  />
-                  <div className="slider-text">Octave {this.state.octave}</div>
-                </Col>
-*/}
                 <Col xs={2}>
                   <Slider
                     value={Number(this.state.attack)}
-                    min={0.01}
+                    min={0.001}
                     max={1}
                     step={0.05}
                     tooltip={false}
                     orientation="vertical"
                     onChange={value => this.changeAttack(value)}
                   />
-
                   <div className="slider-text">Attack</div>
                 </Col>
                 <Col xs={2}>
@@ -402,7 +339,6 @@ class NoteSettings extends React.Component {
                     orientation="vertical"
                     onChange={value => this.changeDecay(value)}
                   />
-
                   <div className="slider-text">Decay</div>
                 </Col>
                 <Col xs={2}>

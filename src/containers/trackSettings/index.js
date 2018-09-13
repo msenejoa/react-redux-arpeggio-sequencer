@@ -183,30 +183,6 @@ class TrackSettings extends React.Component {
     }
   }
 
-  handleOnChangeComplete(value) {
-    if (value === "attack") {
-      this.changeAttack(this.state.attack);
-    }
-    if (value === "decay") {
-      this.changeDecay(this.state.decay);
-    }
-    if (value === "volume") {
-      this.changeVolume(this.state.volume);
-    }
-    if (value === "octave") {
-      this.onChangeOctave(this.state.octave);
-    }
-    if (value === "pattern") {
-      this.changePattern(this.state.patternSelect);
-    }
-  }
-
-  handleOnChange(value, paramater) {
-    this.setState({
-      [paramater]: value
-    });
-  }
-
   toggleBeat() {
     this.props.onToggleBeat(
       !this.state.checked,
@@ -228,7 +204,6 @@ class TrackSettings extends React.Component {
         className="track-pattern-button-container"
         style={{
           backgroundColor:
-            this.state.octaveSelector.bool === true &&
             this.state.octaveSelector.value === String(i + 1)
               ? "#f0932b"
               : "#c7ecee"
@@ -296,29 +271,10 @@ class TrackSettings extends React.Component {
                 <Col xs={12}>
                   <Row around="xs">{octaveArray}</Row>
                 </Col>
-                {/*
-                <Col xs={this.state.isMobile ? 2 : 12} className="sliders">
-                  <Slider
-                    value={Number(this.state.octave)}
-                    min={1}
-                    max={8}
-                    step={1}
-                    tooltip={false}
-                    orientation="vertical"
-                    onChange={i => this.handleOnChange(i, "octave")}
-                    onChangeComplete={() =>
-                      this.handleOnChangeComplete("octave")
-                    }
-                  />
-                  <div className="slider-text">Octave {this.state.octave}</div>
-                </Col>
-*/}
-                {/*scaleList[activeTrackIndex]*/}
-
                 <Col xs={3}>
                   <Slider
                     value={Number(this.state.attack)}
-                    min={0.01}
+                    min={0.001}
                     max={1}
                     step={0.05}
                     tooltip={false}
@@ -337,9 +293,6 @@ class TrackSettings extends React.Component {
                     tooltip={false}
                     orientation="vertical"
                     onChange={value => this.changeDecay(value)}
-                    onChangeComplete={() =>
-                      this.handleOnChangeComplete("decay")
-                    }
                   />
                   <div className="slider-text">Decay</div>
                 </Col>
