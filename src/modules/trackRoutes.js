@@ -4,7 +4,6 @@ export const beats = 8;
 export const measures = 4;
 
 export function* gen(pat = 0, beat = 8) {
-  //console.log(pat)
   for (let i = 0; i < beat; i++) {
     let offset = i + 1;
     let note = arp(i, pat);
@@ -47,11 +46,11 @@ export function arp(note, pat) {
 }
 
 export const arpDictionary = [
-  [0, 1, 2, 4, 5, 3],
-  [0, 2, 3, 1, 5, 4],
-  [0, 1, 2, 4, 3, 5],
-  [0, 3, 1, 4, 5, 2],
-  [0, 2, 4, 4, 5, 3],
+  [0, 2, 4],
+  [0, 4, 2, 5],
+  [0, 1, 5],
+  [0, 3, 5],
+  [0, 3, 4, 6],
   [0, 1, 2, 3, 4, 5],
   [0, 1, 2],
   [0, 1, 2, 4, 3, 5],
